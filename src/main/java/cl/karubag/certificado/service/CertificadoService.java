@@ -4,6 +4,7 @@ import cl.karubag.certificado.dto.CertificadoDTO;
 import cl.karubag.certificado.model.Certificado;
 import cl.karubag.certificado.model.TipoCertificado;
 import cl.karubag.certificado.repository.CertificadoRepository;
+import cl.karubag.certificado.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
@@ -40,7 +41,7 @@ public class CertificadoService {
 
     public CertificadoDTO obtenerPorId(Long id) {
         Certificado certificado = certificadoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Certificado no encontrado con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Certificado no encontrado con id: " + id));
         return toDTO(certificado);
     }
 
@@ -54,7 +55,7 @@ public class CertificadoService {
 
     public CertificadoDTO actualizar(Long id, CertificadoDTO dto) {
         Certificado certificado = certificadoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Certificado no encontrado con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Certificado no encontrado con id: " + id));
         certificado.setClienteId(dto.getClienteId());
         certificado.setTipo(dto.getTipo());
         certificado.setFechaEmision(dto.getFechaEmision());
