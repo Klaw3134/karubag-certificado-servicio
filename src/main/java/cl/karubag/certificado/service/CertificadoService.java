@@ -5,6 +5,7 @@ import cl.karubag.certificado.model.Certificado;
 import cl.karubag.certificado.model.TipoCertificado;
 import cl.karubag.certificado.repository.CertificadoRepository;
 import cl.karubag.certificado.exception.ResourceNotFoundException;
+import cl.karubag.certificado.client.PesajeClient;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
@@ -14,9 +15,12 @@ import java.util.stream.Collectors;
 public class CertificadoService {
 
     private final CertificadoRepository certificadoRepository;
+    private final PesajeClient pesajeClient;
 
-    public CertificadoService(CertificadoRepository certificadoRepository) {
+    public CertificadoService(CertificadoRepository certificadoRepository,
+                          PesajeClient pesajeClient) {
         this.certificadoRepository = certificadoRepository;
+        this.pesajeClient = pesajeClient;
     }
 
     public List<CertificadoDTO> listarTodos() {
@@ -48,7 +52,10 @@ public class CertificadoService {
     public CertificadoDTO crear(CertificadoDTO dto) {
         Certificado certificado = toEntity(dto);
         if (certificado.getFechaEmision() == null) {
-            certificado.setFechaEmision(LocalDate.now());
+        certificado.setFechaEmision(LocalDate.now());
+        }
+         if (certificado.getTotalKilos() == null && dto.getTotalKilos() == null) {
+        // Se puede calcular después con pesajeClient si se tiene retiroId
         }
         return toDTO(certificadoRepository.save(certificado));
     }
