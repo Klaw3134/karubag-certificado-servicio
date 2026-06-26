@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@Tag(name = "Certificados", description = "Gestión de certificados de reciclaje Karübag")
+@Tag(name = "Certificados", description = "Gestion de certificados de reciclaje Karübag")
 @RestController
 @RequestMapping("/api/certificados")
 public class CertificadoController {
@@ -34,7 +34,7 @@ public class CertificadoController {
         return ResponseEntity.ok(certificadoService.listarTodos());
     }
 
-    @Operation(summary = "Listar por cliente", description = "Retorna certificados de un cliente específico")
+    @Operation(summary = "Listar por cliente", description = "Retorna certificados de un cliente especifico")
     @ApiResponse(responseCode = "200", description = "Lista de certificados del cliente")
     @GetMapping("/cliente/{clienteId}")
     public ResponseEntity<List<CertificadoDTO>> listarPorCliente(@PathVariable Long clienteId) {

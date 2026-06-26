@@ -11,6 +11,6 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("Certificado Servicio API")
                         .version("1.0")
-                        .description("API de gestión de certificados Karübag"));
+                        .description("API de gestion de certificados Karübag"));
     }
 }
