@@ -12,7 +12,7 @@ public class PesajeClient {
 
     public PesajeClient(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder
-                .baseUrl("http://localhost:8088")
+                .baseUrl("https://karubag-pesaje-servicio.onrender.com")
                 .build();
     }
 
